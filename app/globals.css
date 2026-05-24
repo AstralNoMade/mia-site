@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Brand colors — strict from PRD §2.1 */
+  --mia-red: #BA1801;
+  --mia-red-deep: #8E1100;
+  --mia-yellow: #E3EA5C;
+  --mia-yellow-soft: #EEF389;
+  --mia-olive: #8D945E;
+
+  --mia-graphite: #616161;
+  --mia-graphite-deep: #3F3F3F;
+  --mia-ink: #1F1F1F;
+  --mia-bg: #E0E1D9;
+  --mia-bg-soft: #EDEDE6;
+  --mia-white: #FFFFFF;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--mia-bg);
+  color: var(--mia-ink);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+/* Selection */
+::selection {
+  background: var(--mia-yellow);
+  color: var(--mia-ink);
+}
+
+/* Reusable display heading clamp */
+.h-display {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.25rem, 5.2vw, 4.75rem);
+}
+
+.h-section {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  font-size: clamp(1.875rem, 3.6vw, 3rem);
+}
+
+.eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.mono {
+  font-family: var(--font-mono), monospace;
+}
+
+/* Container */
+.container-mia {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 768px) {
+  .container-mia { padding-inline: 2rem; }
+}
+
+/* Biomorphic decorative blob */
+.blob {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(1px);
+  opacity: 0.22;
+}
+
+/* Hover line for nav */
+.nav-link {
+  position: relative;
+  transition: color 0.25s ease;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 0;
+  background: var(--mia-red);
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after { width: 100%; }
+
+/* Focus rings — accessibility */
+:focus-visible {
+  outline: 2px solid var(--mia-red);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.5rem;
+  background: var(--mia-red);
+  color: var(--mia-white);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.btn-primary:hover {
+  background: var(--mia-red-deep);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.5rem;
+  background: transparent;
+  color: var(--mia-ink);
+  border: 1.5px solid var(--mia-ink);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.btn-ghost:hover {
+  background: var(--mia-ink);
+  color: var(--mia-yellow);
+}
+
+/* Card */
+.card {
+  background: var(--mia-bg-soft);
+  border: 1px solid rgba(31,31,31,0.08);
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.card:hover {
+  border-color: var(--mia-red);
+  transform: translateY(-2px);
+}
+
+/* Numbered marker */
+.num {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  color: var(--mia-red);
+}
+
+/* Strikethrough span used in headlines */
+.strike {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  opacity: 0.55;
+}
