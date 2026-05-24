@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { asset } from '@/lib/asset';
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -7,7 +8,7 @@ export function Footer() {
       <div className="container-mia py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
         <div className="md:col-span-2 space-y-5">
           <Image
-            src="/logo/logo_yellow.png"
+            src={asset('/logo/logo_yellow.png')}
             alt="МИА"
             width={180}
             height={72}

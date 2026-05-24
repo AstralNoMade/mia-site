@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { asset } from '@/lib/asset';
 
 const NAV = [
   { href: '#about', label: 'О Альянсе' },
@@ -39,7 +40,7 @@ export function Header() {
       <div className="container-mia flex items-center justify-between py-3 md:py-4">
         <a href="#top" className="flex items-center gap-3" aria-label="МИА — на главную">
           <Image
-            src="/logo/logo_red.png"
+            src={asset('/logo/logo_red.png')}
             alt="МИА"
             width={120}
             height={48}

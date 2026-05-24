@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { asset } from '@/lib/asset';
 
 const COUNTERS = [
   { value: '120+', label: 'клиник в составе' },
@@ -20,7 +21,7 @@ export function Hero() {
       {/* Biomorphic decorative cross — right side, opacity .25 per PRD */}
       <div className="pointer-events-none absolute -right-20 top-32 hidden md:block opacity-25">
         <Image
-          src="/logo/logo_yellow.png"
+          src={asset('/logo/logo_yellow.png')}
           alt=""
           width={680}
           height={680}
