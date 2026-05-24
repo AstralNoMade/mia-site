@@ -2,33 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, ArrowRight } from 'lucide-react';
-
-const EVENTS = [
-  {
-    date: '15.06',
-    year: '2026',
-    title: 'Annual Healthcare Investment Forum',
-    place: 'Алматы · The Ritz-Carlton',
-    status: 'Live',
-    desc: 'Ежегодный форум собственников клиник и инвесторов. Панели по ОСМС, M&A, кадрам.',
-  },
-  {
-    date: '04.07',
-    year: '2026',
-    title: 'Закрытая встреча Стратегического клуба',
-    place: 'Астана · по приглашению',
-    status: 'Closed',
-    desc: 'Только для членов Strategic Club и Super-tier. Гость — представитель Минздрава.',
-  },
-  {
-    date: '12.09',
-    year: '2026',
-    title: 'MIA · Региональный круглый стол',
-    place: 'Шымкент · Rixos',
-    status: 'Sold out',
-    desc: 'Региональная сессия для клиник Туркестанской области и юга страны.',
-  },
-];
+import { EVENTS } from '@/lib/content';
 
 const STATUS_STYLES: Record<string, string> = {
   Live: 'bg-mia-yellow text-mia-ink',

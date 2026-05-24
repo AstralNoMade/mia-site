@@ -3,36 +3,16 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, Mail } from 'lucide-react';
+import { NEWS, type NewsCategory } from '@/lib/content';
 
-type Cat = 'kz' | 'world' | 'reg';
-
-const TABS: { id: Cat; label: string }[] = [
+const TABS: { id: NewsCategory; label: string }[] = [
   { id: 'kz', label: 'Казахстан' },
   { id: 'world', label: 'World' },
   { id: 'reg', label: 'Regulation' },
 ];
 
-const NEWS: Record<Cat, { date: string; title: string }[]> = {
-  kz: [
-    { date: '20.05.2026', title: 'РОО МИА представил позицию по тарифам ОСМС на 2027 год' },
-    { date: '14.05.2026', title: 'Алматинский кластер: 12 новых клиник присоединились к Альянсу' },
-    { date: '02.05.2026', title: 'Запуск программы менторства: 30 пар «опытный — начинающий»' },
-    { date: '18.04.2026', title: 'Закрытая встреча правления с региональными лидерами в Шымкенте' },
-  ],
-  world: [
-    { date: '19.05.2026', title: 'McKinsey: рост частной медицины в Центральной Азии — 8% YoY' },
-    { date: '11.05.2026', title: 'WHO: новые рекомендации по цифровым медицинским сервисам' },
-    { date: '03.05.2026', title: 'AI в диагностике — отчёт Stanford о клиническом применении' },
-  ],
-  reg: [
-    { date: '21.05.2026', title: 'Минздрав опубликовал проект изменений в правила лицензирования' },
-    { date: '08.05.2026', title: 'Налоговый кодекс: разъяснения по медицинскому ИП и ТОО' },
-    { date: '29.04.2026', title: 'Новый порядок проверок: что изменится для частных клиник' },
-  ],
-};
-
 export function News() {
-  const [tab, setTab] = useState<Cat>('kz');
+  const [tab, setTab] = useState<NewsCategory>('kz');
 
   return (
     <section id="news" className="py-24 md:py-32 bg-mia-bg-soft">

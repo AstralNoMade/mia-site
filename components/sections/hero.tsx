@@ -4,13 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { asset } from '@/lib/asset';
-
-const COUNTERS = [
-  { value: '120+', label: 'клиник в составе' },
-  { value: '5', label: 'лет деятельности' },
-  { value: '300+', label: 'решённых кейсов' },
-  { value: '14', label: 'регионов РК' },
-];
+import { HERO } from '@/lib/content';
 
 export function Hero() {
   return (
@@ -18,7 +12,6 @@ export function Hero() {
       id="top"
       className="relative overflow-hidden pt-28 md:pt-32 pb-20 md:pb-24 min-h-[100svh] flex flex-col"
     >
-      {/* Biomorphic decorative cross — right side, opacity .25 per PRD */}
       <div className="pointer-events-none absolute -right-20 top-32 hidden md:block opacity-25">
         <Image
           src={asset('/logo/logo_yellow.png')}
@@ -38,7 +31,7 @@ export function Hero() {
             transition={{ duration: 0.5 }}
             className="eyebrow text-mia-red mb-6 flex items-center gap-2"
           >
-            <Sparkles size={14} /> # предприниматели с сердцем врача
+            <Sparkles size={14} /> {HERO.hashtag}
           </motion.p>
 
           <motion.h1
@@ -94,15 +87,14 @@ export function Hero() {
               Капитал должен <span className="not-italic font-bold">созидать</span>,
               а не просто приумножаться.»
             </blockquote>
-            <p className="mt-6 mono text-xs opacity-70">основано в 2021 году</p>
+            <p className="mt-6 mono text-xs opacity-70">основано в {HERO.foundedYear} году</p>
           </div>
         </motion.aside>
       </div>
 
-      {/* Counters */}
       <div className="container-mia relative mt-16 md:mt-20">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-mia-ink/10 rounded-2xl overflow-hidden">
-          {COUNTERS.map((c, i) => (
+          {HERO.counters.map((c, i) => (
             <motion.div
               key={c.label}
               initial={{ opacity: 0, y: 10 }}

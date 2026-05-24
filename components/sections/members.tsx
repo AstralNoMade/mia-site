@@ -1,21 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-
-const COMPANIES = [
-  { name: 'Clinic Alpha', region: 'Алматы', profile: 'Многопрофильная' },
-  { name: 'Beta Lab', region: 'Астана', profile: 'Лаборатория' },
-  { name: 'Gamma Dental', region: 'Шымкент', profile: 'Стоматология' },
-  { name: 'Delta Diagnostics', region: 'Караганда', profile: 'Диагностика' },
-  { name: 'Epsilon Med', region: 'Атырау', profile: 'Эстетическая' },
-  { name: 'Zeta Rehab', region: 'Актобе', profile: 'Реабилитация' },
-  { name: 'Eta Pharma', region: 'Алматы', profile: 'Фармацевтика' },
-  { name: 'Theta Med', region: 'Павлодар', profile: 'Многопрофильная' },
-  { name: 'Iota Health', region: 'Усть-Каменогорск', profile: 'Многопрофильная' },
-  { name: 'Kappa Clinic', region: 'Кызылорда', profile: 'Стоматология' },
-  { name: 'Lambda Lab', region: 'Тараз', profile: 'Лаборатория' },
-  { name: 'Mu Diagnostics', region: 'Костанай', profile: 'Диагностика' },
-];
+import { COMPANIES } from '@/lib/content';
 
 export function Members() {
   return (

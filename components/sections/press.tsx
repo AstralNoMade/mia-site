@@ -2,13 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Newspaper, Download } from 'lucide-react';
-
-const MEDIA = [
-  { name: 'Forbes Kazakhstan', quote: 'Альянс задаёт повестку частной медицины РК.' },
-  { name: 'Kursiv', quote: 'Голос индустрии, который наконец слышно в министерствах.' },
-  { name: 'Tengrinews', quote: 'Объединение, доказавшее что бизнес-сообщество может действовать сообща.' },
-  { name: 'Vlast', quote: 'Редкий пример отраслевой самоорганизации в Казахстане.' },
-];
+import { MEDIA } from '@/lib/content';
 
 export function Press() {
   return (

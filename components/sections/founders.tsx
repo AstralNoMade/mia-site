@@ -1,59 +1,10 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Quote } from 'lucide-react';
-
-type Founder = {
-  name: string;
-  role: string;
-  quote: string;
-  initials: string;
-};
-
-const FOUNDERS: Founder[] = [
-  {
-    name: 'Имя Фамилия',
-    role: 'Председатель правления',
-    quote:
-      'Мы строили клинику с нуля и поняли: пока каждый бьётся в одиночку, отрасль не сдвинется.',
-    initials: 'ИФ',
-  },
-  {
-    name: 'Имя Фамилия',
-    role: 'Член попечительского совета',
-    quote:
-      'Инвестировать в медицину — значит инвестировать в страну. Это не лозунг, это бухгалтерия.',
-    initials: 'ИФ',
-  },
-  {
-    name: 'Имя Фамилия',
-    role: 'Руководитель раб. группы «Финансы»',
-    quote:
-      'Тарифы ОСМС, лизинг оборудования, налоги — это не «бухгалтерия», это судьба клиник.',
-    initials: 'ИФ',
-  },
-  {
-    name: 'Имя Фамилия',
-    role: 'Руководитель раб. группы «Кадры»',
-    quote:
-      'Главный дефицит не денег, а специалистов. И его решает только сообщество.',
-    initials: 'ИФ',
-  },
-  {
-    name: 'Имя Фамилия',
-    role: 'CMO сети клиник',
-    quote:
-      'Стандарты, которым доверяет пациент, можно ввести только сообща. По одному это слишком дорого.',
-    initials: 'ИФ',
-  },
-  {
-    name: 'Имя Фамилия',
-    role: 'CFO холдинга',
-    quote:
-      'Когда регулятор слышит одну клинику — это шум. Когда слышит Альянс — это диалог.',
-    initials: 'ИФ',
-  },
-];
+import { asset } from '@/lib/asset';
+import { FOUNDERS } from '@/lib/content';
 
 export function Founders() {
   return (
@@ -62,9 +13,7 @@ export function Founders() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
           <div>
             <p className="num mb-3">03 / ИСТОРИИ</p>
-            <h2 className="h-section max-w-2xl">
-              Те, кто стоял у истоков Альянса
-            </h2>
+            <h2 className="h-section max-w-2xl">Те, кто стоял у истоков Альянса</h2>
           </div>
           <p className="max-w-md text-mia-ink/75">
             Шесть из десятков голосов. Их пути разные — кардиология, лаборатории, лизинг
@@ -75,7 +24,7 @@ export function Founders() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {FOUNDERS.map((f, i) => (
             <motion.article
-              key={i}
+              key={`${f.name}-${i}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -83,9 +32,19 @@ export function Founders() {
               className="card group flex flex-col"
             >
               <div className="flex items-center gap-4 mb-5">
-                <div className="w-14 h-14 rounded-full bg-mia-graphite-deep text-mia-yellow flex items-center justify-center font-display font-bold text-lg">
-                  {f.initials}
-                </div>
+                {f.photo ? (
+                  <Image
+                    src={asset(f.photo)}
+                    alt={f.name}
+                    width={56}
+                    height={56}
+                    className="w-14 h-14 rounded-full object-cover grayscale"
+                  />
+                ) : (
+                  <div className="w-14 h-14 rounded-full bg-mia-graphite-deep text-mia-yellow flex items-center justify-center font-display font-bold text-lg">
+                    {f.initials}
+                  </div>
+                )}
                 <div>
                   <p className="font-display font-bold text-lg leading-tight">{f.name}</p>
                   <p className="mono text-xs text-mia-ink/60 mt-1">{f.role}</p>

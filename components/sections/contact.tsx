@@ -2,10 +2,16 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { QRCodeSVG } from 'qrcode.react';
 import { MapPin, Mail, Phone, Send, MessageCircle, Check } from 'lucide-react';
+import { CONTACTS } from '@/lib/content';
 
 export function Contact() {
   const [sent, setSent] = useState(false);
+
+  // Ссылки для QR-кодов (открываются в WhatsApp / Telegram при сканировании)
+  const waUrl = `https://wa.me/${CONTACTS.whatsapp.replace(/\D/g, '')}`;
+  const tgUrl = `https://t.me/${CONTACTS.telegram}`;
 
   return (
     <section id="contact" className="py-24 md:py-32 bg-mia-bg">
@@ -14,28 +20,43 @@ export function Contact() {
         <h2 className="h-section max-w-3xl mb-12">Связаться с Альянсом</h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* QR + контакты */}
           <div className="lg:col-span-5 space-y-6">
             <div className="grid grid-cols-2 gap-4">
-              <QrCard label="WhatsApp" handle="+7 700 000 00 00" icon={<MessageCircle size={18} />} />
-              <QrCard label="Telegram" handle="@mia_kz" icon={<Send size={18} />} />
+              <QrCard
+                label="WhatsApp"
+                handle={CONTACTS.whatsappDisplay}
+                href={waUrl}
+                value={waUrl}
+                icon={<MessageCircle size={18} />}
+              />
+              <QrCard
+                label="Telegram"
+                handle={CONTACTS.telegramDisplay}
+                href={tgUrl}
+                value={tgUrl}
+                icon={<Send size={18} />}
+              />
             </div>
 
             <ul className="card !p-7 space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-mia-red shrink-0 mt-0.5" />
-                <span>г. Алматы, пр. Достык, 0<br /><span className="mono text-xs text-mia-ink/55">офис открыт пн–пт 10:00–18:00</span></span>
+                <span>
+                  {CONTACTS.address}
+                  <br />
+                  <span className="mono text-xs text-mia-ink/55">{CONTACTS.addressNote}</span>
+                </span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-mia-red shrink-0" />
-                <a href="mailto:info@mia.kz" className="hover:text-mia-red transition-colors">
-                  info@mia.kz
+                <a href={`mailto:${CONTACTS.email}`} className="hover:text-mia-red transition-colors">
+                  {CONTACTS.email}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={18} className="text-mia-red shrink-0" />
-                <a href="tel:+77000000000" className="hover:text-mia-red transition-colors">
-                  +7 700 000 00 00
+                <a href={`tel:${CONTACTS.phone}`} className="hover:text-mia-red transition-colors">
+                  {CONTACTS.phoneDisplay}
                 </a>
               </li>
             </ul>
@@ -45,7 +66,6 @@ export function Contact() {
             </div>
           </div>
 
-          {/* Форма обратной связи */}
           <div className="lg:col-span-7">
             <form
               onSubmit={(e) => {
@@ -107,42 +127,34 @@ export function Contact() {
   );
 }
 
-// Deterministic 7×7 QR-like pattern (no SSR mismatch)
-const QR_PATTERN = [
-  1,1,1,0,1,1,1, 1,0,1,0,1,0,1, 1,1,0,1,0,1,1,
-  0,1,1,1,1,0,0, 1,0,0,1,1,1,0, 1,1,0,1,0,1,1,
-  1,0,1,0,1,1,1,
-];
-
 function QrCard({
   label,
   handle,
+  href,
+  value,
   icon,
 }: {
   label: string;
   handle: string;
+  href: string;
+  value: string;
   icon: React.ReactNode;
 }) {
   return (
-    <motion.div
+    <motion.a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       whileHover={{ y: -3 }}
       className="card !p-5 flex flex-col items-center text-center"
     >
-      {/* QR placeholder — replace with server-generated QR in production */}
-      <div className="w-full aspect-square rounded-xl bg-mia-ink text-mia-yellow flex items-center justify-center mb-4">
-        <div className="grid grid-cols-7 gap-[3px] w-3/4">
-          {QR_PATTERN.map((on, i) => (
-            <span
-              key={i}
-              className={`aspect-square ${on ? 'bg-mia-yellow' : 'bg-mia-ink'}`}
-            />
-          ))}
-        </div>
+      <div className="bg-mia-white p-3 rounded-xl mb-4">
+        <QRCodeSVG value={value} size={120} level="L" fgColor="#1F1F1F" bgColor="#FFFFFF" />
       </div>
       <p className="flex items-center gap-2 mono text-xs uppercase tracking-widest text-mia-red">
         {icon} {label}
       </p>
       <p className="text-sm mt-1">{handle}</p>
-    </motion.div>
+    </motion.a>
   );
 }
