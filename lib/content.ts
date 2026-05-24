@@ -221,6 +221,13 @@ export const PAYMENT = {
   },
   purposeTemplate:
     'Членский взнос РОО «МИА», уровень {tier}, ФИО плательщика, БИН компании',
+  // Опциональная Kaspi Pay business-ссылка. Когда РОО зарегистрирует
+  // бизнес-кабинет на pay.kaspi.kz и создаст платёжную ссылку, вставьте её сюда.
+  // Если null — кнопка «Оплатить через Kaspi» не показывается.
+  // Формат: https://pay.kaspi.kz/pay/XXXXXXX
+  kaspiPayUrl: null as string | null,
+  // Куда писать после оплаты
+  receiptEmail: 'billing@mia.kz',
 } as const;
 
 // ──────────────────────────────────────────────────────────

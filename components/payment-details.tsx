@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { QRCodeSVG } from 'qrcode.react';
-import { X, Copy, Check, Building2 } from 'lucide-react';
-import { PAYMENT } from '@/lib/content';
+import { X, Copy, Check, Building2, ExternalLink, MessageCircle, Mail } from 'lucide-react';
+import { PAYMENT, CONTACTS } from '@/lib/content';
 
 type Props = {
   open: boolean;
@@ -149,12 +149,46 @@ export function PaymentDetails({ open, onClose, tierName, amountKzt }: Props) {
                   ))}
                 </dl>
 
+                {/* Action buttons */}
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {PAYMENT.kaspiPayUrl && (
+                    <a
+                      href={PAYMENT.kaspiPayUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary !py-3 !px-4 !text-[11px]"
+                    >
+                      Оплатить в Kaspi <ExternalLink size={12} />
+                    </a>
+                  )}
+                  <a
+                    href={`https://wa.me/${CONTACTS.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(
+                      `Здравствуйте! Оплатил(а) членский взнос РОО «МИА», уровень «${tierName}». Прикладываю чек:`,
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-mia-ink text-mia-bg-soft mono text-[11px] uppercase tracking-widest hover:bg-black transition-colors"
+                  >
+                    <MessageCircle size={12} /> Прислать чек в WhatsApp
+                  </a>
+                  <a
+                    href={`mailto:${PAYMENT.receiptEmail}?subject=${encodeURIComponent(
+                      `Счёт на оплату членского взноса (${tierName})`,
+                    )}&body=${encodeURIComponent(
+                      `Здравствуйте!\n\nПрошу выставить счёт-фактуру на членский взнос РОО «МИА», уровень «${tierName}».\n\nКомпания: \nБИН: \nФИО плательщика: \n\nСпасибо.`,
+                    )}`}
+                    className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-transparent text-mia-ink border border-mia-ink/30 mono text-[11px] uppercase tracking-widest hover:border-mia-red hover:text-mia-red transition-colors"
+                  >
+                    <Mail size={12} /> Запросить счёт
+                  </a>
+                </div>
+
                 <p className="mt-5 text-xs text-mia-ink/60 leading-relaxed">
-                  После оплаты пришлите чек на{' '}
-                  <a href="mailto:info@mia.kz" className="text-mia-red underline">
-                    info@mia.kz
-                  </a>{' '}
-                  или в WhatsApp Альянса — мы выставим счёт-фактуру и активируем членство.
+                  После оплаты пришлите чек в WhatsApp или на{' '}
+                  <a href={`mailto:${PAYMENT.receiptEmail}`} className="text-mia-red underline">
+                    {PAYMENT.receiptEmail}
+                  </a>
+                  {' '}— мы выставим счёт-фактуру и активируем членство.
                 </p>
               </div>
 
